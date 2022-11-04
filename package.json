@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Api to foodexplorer",
   "main": "index.js",
+  "type": "module",
+  
   "scripts": {
     "start": "nodemon src/server.js"
   },

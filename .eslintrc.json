@@ -10,6 +10,7 @@
     "sourceType": "module"
   },
   "rules": {
-    "no-useless-constructor": "off"
+    "no-useless-constructor": "off",
+    "single": "on"
   }
 }
