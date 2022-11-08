@@ -4,7 +4,7 @@ import "express-async-errors";
 
 import express, { json, urlencoded } from "express";
 
-import AppError from "../src/utils/AppError.js";
+import AppError from "./utils/AppError.js";
 
 import routes from "./routes/index.js";
 
