@@ -8,5 +8,8 @@ const usersRoutes = Router();
 
 usersRoutes.get("/", usersController.index);
 usersRoutes.get("/:id", usersController.show);
+usersRoutes.get("/", usersController.create);
+usersRoutes.get("/:id", usersController.update);
+usersRoutes.get("/:id", usersController.delete);
 
 export default usersRoutes;
