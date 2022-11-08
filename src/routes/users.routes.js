@@ -7,5 +7,6 @@ const usersController = new UsersController();
 const usersRoutes = Router();
 
 usersRoutes.get("/", usersController.index);
+usersRoutes.get("/:id", usersController.show);
 
 export default usersRoutes;
