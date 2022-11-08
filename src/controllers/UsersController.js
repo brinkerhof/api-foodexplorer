@@ -1,6 +1,6 @@
 import knex from "../database//knex/index.js";
 
-class UsersController {
+export default class UsersController {
   async index(req, res) {
     const users = await knex("users");
 
@@ -11,5 +11,3 @@ class UsersController {
   async update(req, res) {}
   async delete(req, res) {}
 }
-
-export default UsersController;
