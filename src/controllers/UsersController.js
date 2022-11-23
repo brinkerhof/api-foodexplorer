@@ -1,4 +1,4 @@
-import knex from "../database//knex/index.js";
+import knex from "../database/knex/index.js";
 import AppError from "../utils/AppError.js";
 
 export default class UsersController {
