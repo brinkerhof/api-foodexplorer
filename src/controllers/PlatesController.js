@@ -18,7 +18,23 @@ export default class PlatesController {
 
     return res.json(plate);
   }
-  async create(req, res) {}
+  async create(req, res) {
+    const user_id = req.user.id;
+    const { name, description, image, price, ingredients_id } = req.body;
+
+    const [plate_id] = await knex("plates")
+      .insert({ name, description, image, price, user_id })
+      .returning("id");
+    try {
+      ingredients_id.map(async (ingredient_id) => {
+        await knex("ingredients_in_plates").insert({ ingredient_id, plate_id });
+      });
+      return res.json("Plate created");
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
   async update(req, res) {}
   async delete(req, res) {}
 }

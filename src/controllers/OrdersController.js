@@ -37,5 +37,9 @@ export default class OrdersController {
     }
   }
   async update(req, res) {}
-  async delete(req, res) {}
+  async delete(req, res) {
+    const order_id = req.params.id;
+
+    const order = await knex("orders").where({ id: order_id });
+  }
 }
