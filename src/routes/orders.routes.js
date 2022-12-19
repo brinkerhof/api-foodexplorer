@@ -9,8 +9,8 @@ const ordersRoutes = Router();
 
 ordersRoutes.get("/", ensureAuthenticated, ordersController.index);
 ordersRoutes.get("/:id", ensureAuthenticated, ordersController.show);
-ordersRoutes.get("/", ensureAuthenticated, ordersController.create);
-ordersRoutes.get("/:id", ensureAuthenticated, ordersController.update);
-ordersRoutes.get("/:id", ensureAuthenticated, ordersController.delete);
+ordersRoutes.post("/", ensureAuthenticated, ordersController.create);
+ordersRoutes.put("/:id", ensureAuthenticated, ordersController.update);
+ordersRoutes.delete("/:id", ensureAuthenticated, ordersController.delete);
 
 export default ordersRoutes;

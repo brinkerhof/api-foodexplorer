@@ -5,6 +5,8 @@ import "express-async-errors";
 
 import express, { json, urlencoded } from "express";
 
+import { UPLOADS_FOLDER } from "./configs/upload.js";
+
 import AppError from "./utils/AppError.js";
 
 import routes from "./routes/index.js";
@@ -15,6 +17,8 @@ const app = express();
 //app.options("*", cors());
 app.use(json());
 app.use(urlencoded({ extended: true }));
+
+app.use("/files", express.static(UPLOADS_FOLDER));
 
 app.use(routes);
 

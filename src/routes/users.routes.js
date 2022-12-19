@@ -9,8 +9,8 @@ const usersRoutes = Router();
 
 usersRoutes.get("/", usersController.index);
 usersRoutes.get("/:id", usersController.show);
-usersRoutes.get("/", usersController.create);
-usersRoutes.get("/:id", ensureAuthenticated, usersController.update);
-usersRoutes.get("/:id", ensureAuthenticated, usersController.delete);
+usersRoutes.post("/", usersController.create);
+usersRoutes.put("/:id", ensureAuthenticated, usersController.update);
+usersRoutes.delete("/:id", ensureAuthenticated, usersController.delete);
 
 export default usersRoutes;

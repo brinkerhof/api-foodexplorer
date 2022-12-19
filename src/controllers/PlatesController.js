@@ -1,5 +1,6 @@
 import knex from "../database/knex/index.js";
 import AppError from "../utils/AppError.js";
+import DiskStorage from "../providers/DiskStorage.js";
 
 export default class PlatesController {
   async index(req, res) {
@@ -20,7 +21,12 @@ export default class PlatesController {
   }
   async create(req, res) {
     const user_id = req.user.id;
-    const { name, description, image, price, ingredients_id } = req.body;
+    const plateFilename = req.file.filename;
+    const { name, description, price, ingredients_id } = req.body;
+
+    const diskStorage = new DiskStorage();
+
+    const image = await diskStorage.saveFile(plateFilename);
 
     const [plate_id] = await knex("plates")
       .insert({ name, description, image, price, user_id })

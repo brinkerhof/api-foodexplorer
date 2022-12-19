@@ -41,5 +41,13 @@ export default class OrdersController {
     const order_id = req.params.id;
 
     const order = await knex("orders").where({ id: order_id });
+
+    if (!order) {
+      throw new AppError("No order found");
+    }
+
+    await knex("orders").where({ id: order_id }).del();
+
+    return res.json("Sucess, order deleted");
   }
 }
