@@ -13,12 +13,7 @@ const platesRoutes = Router();
 
 platesRoutes.get("/", platesController.index);
 platesRoutes.get("/:id", platesController.show);
-platesRoutes.post(
-  "/",
-  ensureAuthenticated,
-  upload.single("image"),
-  platesController.create
-);
+platesRoutes.post("/", upload.single("image"), platesController.create);
 platesRoutes.put("/:id", ensureAuthenticated, platesController.update);
 platesRoutes.delete("/:id", ensureAuthenticated, platesController.delete);
 

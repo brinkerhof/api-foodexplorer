@@ -3,9 +3,9 @@ import { Router } from "express";
 import UsersController from "../controllers/UsersController.js";
 import ensureAuthenticated from "../middlewares/ensureAuthenticated.js";
 
-const usersController = new UsersController();
-
 const usersRoutes = Router();
+
+const usersController = new UsersController();
 
 usersRoutes.get("/", usersController.index);
 usersRoutes.get("/:id", usersController.show);

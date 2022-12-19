@@ -19,10 +19,12 @@ export default class PlatesController {
 
     return res.json(plate);
   }
-  async create(req, res) {
-    const user_id = req.user.id;
+  async create(req, res, next) {
+    const user_id = "c97f47af-22ed-474a-a9b4-c9d89c6909f3";
     const plateFilename = req.file.filename;
-    const { name, description, price, ingredients_id } = req.body;
+    const toJson = JSON.parse(req.body.data);
+
+    const { name, description, price, ingredients_id } = toJson;
 
     const diskStorage = new DiskStorage();
 
@@ -31,15 +33,21 @@ export default class PlatesController {
     const [plate_id] = await knex("plates")
       .insert({ name, description, image, price, user_id })
       .returning("id");
-    try {
-      ingredients_id.map(async (ingredient_id) => {
-        await knex("ingredients_in_plates").insert({ ingredient_id, plate_id });
-      });
-      return res.json("Plate created");
-    } catch (error) {
-      console.log(error);
-      next(error);
+    if (ingredients_id) {
+      try {
+        ingredients_id.map(async (ingredient_id) => {
+          await knex("ingredients_in_plates").insert({
+            ingredient_id,
+            plate_id,
+          });
+        });
+        return res.json("Plate created");
+      } catch (error) {
+        console.log(error);
+        next(error);
+      }
     }
+    return res.json("Plate created");
   }
   async update(req, res) {}
   async delete(req, res) {}

@@ -23,13 +23,13 @@ export default class UsersController {
 
     const emailVerifyIfExists = await knex("users").where({ email }).first();
 
-    if (!emailVerifyIfExists) {
-      throw new AppError("User already exists", 404);
+    if (emailVerifyIfExists) {
+      throw new AppError({ message: "Email already exists" }, 404);
     }
 
     await knex("users").insert({ name, email, password, isAdmin });
 
-    return res.json("User successfully created");
+    return res.json("User created");
   }
   async update(req, res) {
     const { name, email, password, isAdmin } = req.body;

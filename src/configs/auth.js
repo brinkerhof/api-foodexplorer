@@ -1,1 +1,1 @@
-export const jwt = { secret: "default", expiresIn: "1d" };
+export const jwtConfig = { secret: "default", expiresIn: "1d" };
