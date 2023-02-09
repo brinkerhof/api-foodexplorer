@@ -1,4 +1,4 @@
-//import cors from "cors";
+import cors from "cors";
 // CTRL + ALT + L CONSOLE LOG INCRIVEL
 
 import "express-async-errors";
@@ -13,8 +13,8 @@ import routes from "./routes/index.js";
 
 const app = express();
 
-//app.use(cors({ credentials: true, origin: true }));
-//app.options("*", cors());
+app.use(cors({ credentials: true, origin: true }));
+app.options("*", cors());
 app.use(json());
 app.use(urlencoded({ extended: true }));
 

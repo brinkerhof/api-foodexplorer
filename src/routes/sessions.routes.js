@@ -6,6 +6,6 @@ const sessionsRoutes = Router();
 
 const authController = new AuthController();
 
-sessionsRoutes.post("/sessions", authController.create);
+sessionsRoutes.post("/", authController.create);
 
 export default sessionsRoutes;
