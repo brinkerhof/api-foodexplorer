@@ -1,6 +1,6 @@
 import knex from "../database/knex/index.js";
-import { jwt } from "../configs/auth.js";
-import { sign } from "jsonwebtoken";
+import { jwtConfig } from "../configs/auth.js";
+import sign from "jsonwebtoken";
 import AppError from "../utils/AppError.js";
 
 export default class AuthController {
@@ -18,7 +18,7 @@ export default class AuthController {
         throw new AppError("Email or password is incorrect", 401);
       }
 
-      const { secret, expiresIn } = jwt;
+      const { secret, expiresIn } = jwtConfig;
       const token = sign({ user_id }, secret, { expiresIn });
 
       return res.json({ user, token });
