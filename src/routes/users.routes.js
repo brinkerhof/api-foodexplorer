@@ -8,6 +8,7 @@ const usersRoutes = Router();
 const usersController = new UsersController();
 
 usersRoutes.get("/", usersController.index);
+usersRoutes.get("/my-infos", ensureAuthenticated, usersController.myInfos);
 usersRoutes.get("/:id", usersController.show);
 usersRoutes.post("/", usersController.create);
 usersRoutes.put("/:id", ensureAuthenticated, usersController.update);

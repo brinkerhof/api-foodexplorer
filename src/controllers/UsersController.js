@@ -7,6 +7,14 @@ export default class UsersController {
 
     return res.json(users);
   }
+  //troca aqui
+  async myInfos(req, res) {
+    const user_id = req.user.id;
+
+    const user = await knex("users").where({ id: user_id }).first();
+
+    return res.json({ ...user, password: undefined });
+  }
   async show(req, res) {
     const user_id = req.params.id;
 

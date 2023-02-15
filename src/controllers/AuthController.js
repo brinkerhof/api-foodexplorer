@@ -5,7 +5,7 @@ import AppError from "../utils/AppError.js";
 
 export default class AuthController {
   async create(req, res,next) {
-    console.log(req.body)
+
     const { email, password } = req.body;
     
     try {
@@ -22,7 +22,9 @@ export default class AuthController {
       const { secret, expiresIn } = jwtConfig;
       const token = jwt.sign({ user_id }, secret, { expiresIn });
 
-      return res.json({ user, token });
+      const resUser = {id: user_id, name: user.name, email:user.email, isAdmin:user.isAdmin}
+
+      return res.json({ resUser, token });
     } catch (error) {
       next(error)
     }
