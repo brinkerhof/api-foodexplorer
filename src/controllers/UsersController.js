@@ -27,7 +27,7 @@ export default class UsersController {
     return res.json(user);
   }
   async create(req, res) {
-    const { name, email, password, isAdmin } = req.body;
+    const { name, email, password, isAdmin = false } = req.body;
 
     const emailVerifyIfExists = await knex("users").where({ email }).first();
 

@@ -11,6 +11,7 @@ export function up(knex) {
     table.string("name").notNullable();
     table.string("description").notNullable();
     table.string("image").notNullable();
+    table.string("category").notNullable();
     table.string("price").notNullable();
     table.uuid("user_id").references("id").inTable("users").onDelete("CASCADE");
     table.timestamp("created_at").defaultTo(knex.fn.now());
