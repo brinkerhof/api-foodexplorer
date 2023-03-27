@@ -20,7 +20,7 @@ export default class OrdersController {
   }
   async create(req, res) {
     const user_id = req.user.id;
-    const { status, date, plates_id } = req.body;
+    const { status, plates_id } = req.body;
 
     const [order_id] = await knex("orders")
       .insert({ user_id, status, date })

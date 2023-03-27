@@ -19,6 +19,30 @@ export default class PlatesController {
 
     return res.json(plate);
   }
+  async showIngredients(req, res) {
+    const plate_id = req.params.id;
+
+    const [ingredients_id] = await knex("ingredients_in_plates").where({
+      plate_id,
+    });
+
+    try {
+      const ingredients = ingredients_id.map(async (ingredient_id) => {
+        await knex("ingredients").where({ id: ingredient_id });
+      });
+      return ingredients;
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+
+    if (!plate) {
+      throw new AppError("plate not found", 401);
+    }
+
+    return res.json(plate);
+  }
+
   async create(req, res, next) {
     const user_id = "c97f47af-22ed-474a-a9b4-c9d89c6909f3";
     const plateFilename = req.file.filename;
@@ -26,12 +50,14 @@ export default class PlatesController {
 
     const { name, description, price, ingredients_id } = toJson;
 
+    const priceFormatted = Number(price.replace(",", "."));
+
     const diskStorage = new DiskStorage();
 
     const image = await diskStorage.saveFile(plateFilename);
 
     const [plate_id] = await knex("plates")
-      .insert({ name, description, image, price, user_id })
+      .insert({ name, description, image, priceFormatted, user_id })
       .returning("id");
     if (ingredients_id) {
       try {
