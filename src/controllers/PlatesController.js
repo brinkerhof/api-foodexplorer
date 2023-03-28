@@ -48,7 +48,7 @@ export default class PlatesController {
     const plateFilename = req.file.filename;
     const toJson = JSON.parse(req.body.data);
 
-    const { name, description, price, ingredients_id } = toJson;
+    const { name, description, category, price, ingredients_id } = toJson;
 
     const priceFormatted = Number(price.replace(",", "."));
 
@@ -57,7 +57,7 @@ export default class PlatesController {
     const image = await diskStorage.saveFile(plateFilename);
 
     const [plate_id] = await knex("plates")
-      .insert({ name, description, image, priceFormatted, user_id })
+      .insert({ name, description, category, image, priceFormatted, user_id })
       .returning("id");
     if (ingredients_id) {
       try {
