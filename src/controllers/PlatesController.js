@@ -48,7 +48,7 @@ export default class PlatesController {
     const plateFilename = req.file.filename;
     const toJson = JSON.parse(req.body.data);
 
-    const { name, description, category, price, ingredients_id } = toJson;
+    const { name, description, category, price, ingredients } = toJson;
 
     const priceFormatted = Number(price.replace(",", "."));
 
@@ -59,9 +59,19 @@ export default class PlatesController {
     const [plate_id] = await knex("plates")
       .insert({ name, description, category, image, priceFormatted, user_id })
       .returning("id");
-    if (ingredients_id) {
+    if (ingredients) {
+      const listIngredientsIds = [];
       try {
-        ingredients_id.map(async (ingredient_id) => {
+        ingredients.map(async (ingredient) => {
+          const { id } = await knex("ingredients")
+            .select({ name: ingredient.name })
+            .first();
+
+          listIngredientsIds.push(id);
+        });
+      } catch (error) {}
+      try {
+        listIngredientsIds.map(async (ingredient_id) => {
           await knex("ingredients_in_plates").insert({
             ingredient_id,
             plate_id,
