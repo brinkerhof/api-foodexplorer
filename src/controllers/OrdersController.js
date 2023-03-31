@@ -20,16 +20,20 @@ export default class OrdersController {
   }
   async create(req, res) {
     const user_id = req.user.id;
-    const { status, plates_id } = req.body;
+    const plates = req.body;
 
     const [order_id] = await knex("orders")
-      .insert({ user_id, status, date })
+      .insert({ user_id, status: "ok", name: "Order" })
       .returning("id");
 
     try {
-      plates_id.map(async (plate_id) => {
-        await knex("plates_in_orders").insert({ plate_id, order_id });
+      plates.map(async (plate) => {
+        await knex("plates_in_orders").insert({
+          plate_id: plate.id,
+          order_id: order_id.id,
+        });
       });
+
       return res.json("Order created");
     } catch (error) {
       console.log(error);

@@ -40,7 +40,7 @@ export default class PlatesController {
     };
     return res.json(realPlateIngredients);
   }
-
+  x1;
   async create(req, res, next) {
     const user_id = req.user.id;
     const plateFilename = req.file.filename;
