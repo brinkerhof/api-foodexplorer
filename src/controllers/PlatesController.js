@@ -4,7 +4,10 @@ import DiskStorage from "../providers/DiskStorage.js";
 
 export default class PlatesController {
   async index(req, res) {
-    const plates = await knex("plates");
+    const { name } = req.query;
+    const plates = await knex("plates")
+      .whereLike("plates.name", `%${name}%`)
+      .orderBy("name");
 
     return res.json(plates);
   }
