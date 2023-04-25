@@ -31,7 +31,6 @@ export default class PlatesController {
         .first();
       realIngredients.push(newIngredient);
     }
-    console.log(ingredientsInPlatesListId);
 
     const realPlateIngredients = {
       name: plate.name,
@@ -49,7 +48,6 @@ export default class PlatesController {
     const plateFilename = req.file.filename;
 
     const { name, description, category, price, ingredients } = req.body;
-    console.log({ ingredients });
 
     const priceFormatted = Number(price.replace(",", "."));
 
@@ -99,7 +97,6 @@ export default class PlatesController {
 
     await knex("plates").where({ id }).update(plate);
     await knex("plates").where({ id }).update("updated_at", knex.fn.now());
-    console.log(ingredients);
 
     await knex("ingredients_in_plates").where({ plate_id: id }).delete();
     await knex("ingredients_in_plates")
