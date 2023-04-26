@@ -15,6 +15,8 @@ O projeto será divido em duas partes: `Front-end` e `Back-end`<br>
 Este e o `Back-end`.<br>
 Link para o `Front-end`: https://github.com/brinkerhof/front-foodexplorer
 
+Link de `Deploy`: https://api-food-explorer-nwu0.onrender.com
+
 ### 📘 Tecnologias utilizadas no `Front-end`
 
 - [Node.js](https://nodejs.org/en/)
