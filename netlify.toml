@@ -1,10 +1,6 @@
-[[redirects]]
-  from = "https://food-explorer-brinkerhoff.netlify.app/"
-  to = "https://effulgent-dodol-688c94.netlify.app/"
-  status = 200
-  force = true
-  headers = {X-From = "Netlify"}
 [[headers]]
   for = "/*"
   [headers.values]
     Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
