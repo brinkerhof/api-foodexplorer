@@ -17,7 +17,7 @@ Link para o `Front-end`: https://github.com/brinkerhof/front-foodexplorer
 
 Link de `Deploy`: https://api-food-explorer-nwu0.onrender.com
 
-### 📘 Tecnologias utilizadas no `Front-end`
+### 📘 Tecnologias utilizadas no `Back-end`
 
 - [Node.js](https://nodejs.org/en/)
 - [Javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
