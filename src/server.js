@@ -1,19 +1,17 @@
-import cors from "cors";
 // CTRL + ALT + L CONSOLE LOG INCRIVEL
 
 import express from "express";
+import cors from "cors";
 
 import { UPLOADS_FOLDER } from "./configs/upload.js";
 
 import AppError from "./utils/AppError.js";
 
 import routes from "./routes/index.js";
-import { json } from "express";
 
 const app = express();
 
-app.use(cors({ credentials: true, origin: true }));
-app.options("*", cors());
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

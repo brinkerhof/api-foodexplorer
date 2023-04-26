@@ -32,16 +32,32 @@ Link para o `Front-end`: https://github.com/brinkerhof/front-foodexplorer
 
 ```bash
 # Faça o clone do repotório
-  git clone git@github.com:brinkerhof/api-foodexplorer
+$ git clone git@github.com:brinkerhof/api-foodexplorer
 
 # Acessar a pasta do projeto pelo terminal
-  cd api-foodexplorer
+$ cd api-foodexplorer
 
 # Faça a instalação das depêndencias
-  npm i
+$ npm i
+
+# Este comando cria as tabelas no banco de dados
+# Como estamos usando Sqlite3 nesse projeto, ele ja vem com os dados ao clonar o repo
+$ npm run migrate
+
+# Este comando cria o usuario de Admin no banco se voce resolveu usar o npm migrate
+$ npm run seed
+
+# Admin login
+$ email: admin@admin.com
+$ password: 123456
+
+# User login
+$ email: user@user.com
+$ password: 123456
 
 # Executando o projeto no ambiente de desenvolvimento
-  npm run start
+$ npm run start
+# A api estara rodando em http://localhost:3000
 ```
 
 ## ✔️ Autor

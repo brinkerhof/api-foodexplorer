@@ -14,5 +14,8 @@ export const development = {
   migrations: {
     directory: resolve(__dirname, "src", "database", "knex", "migrations"),
   },
+  seeds: {
+    directory: resolve(__dirname, "src", "database", "knex", "seeds"),
+  },
   useNullAsDefault: true,
 };

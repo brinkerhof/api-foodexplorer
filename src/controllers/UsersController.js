@@ -1,4 +1,6 @@
 import knex from "../database/knex/index.js";
+import pkg from "bcryptjs";
+const { hash } = pkg;
 import AppError from "../utils/AppError.js";
 
 export default class UsersController {
@@ -34,10 +36,16 @@ export default class UsersController {
     if (emailVerifyIfExists) {
       throw new AppError({ message: "Email already exists" }, 404);
     }
+    const hashedPassword = await hash(password, 8);
 
-    await knex("users").insert({ name, email, password, isAdmin });
+    await knex("users").insert({
+      name,
+      email,
+      password: hashedPassword,
+      isAdmin,
+    });
 
-    return res.json("User created");
+    return res.status(201).json("User created");
   }
   async update(req, res) {
     const { name, email, password, isAdmin } = req.body;
