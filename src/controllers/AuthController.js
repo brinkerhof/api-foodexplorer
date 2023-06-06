@@ -10,14 +10,14 @@ export default class AuthController {
     const { email, password } = req.body;
 
     try {
-      const user = await knex("users").where({ email }).first();
-      const user_id = user?.id;
+      const resUser = await knex("users").where({ email }).first();
+      const user_id = resUser?.id;
 
-      if (!user) {
+      if (!resUser) {
         throw new AppError("Email or password is incorrect", 401);
       }
 
-      const passwordMatched = await compare(password, user.password);
+      const passwordMatched = await compare(password, resUser.password);
 
       if (!passwordMatched) {
         throw new AppError("Email or password is incorrect", 401);
@@ -25,16 +25,16 @@ export default class AuthController {
       const { secret, expiresIn } = jwtConfig;
       const token = jwt.sign({ user_id }, secret, { expiresIn });
 
-      const booleanIsAdmin = !!user.isAdmin;
+      const booleanIsAdmin = !!resUser.isAdmin;
 
-      const resUser = {
+      const user = {
         id: user_id,
-        name: user.name,
-        email: user.email,
+        name: resUser.name,
+        email: resUser.email,
         isAdmin: booleanIsAdmin,
       };
 
-      return res.json({ resUser, token });
+      return res.json({ user, token });
     } catch (error) {
       next(error);
     }

@@ -9,6 +9,11 @@ export function up(knex) {
         )
       );
     table.string("name").notNullable();
+    table
+      .uuid("plate_id")
+      .references("id")
+      .inTable("plates")
+      .onDelete("CASCADE");
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table.timestamp("updated_at").defaultTo(knex.fn.now());
   });
