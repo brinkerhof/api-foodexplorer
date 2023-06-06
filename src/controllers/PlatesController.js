@@ -79,16 +79,17 @@ export default class PlatesController {
     ingredients = ingredients ?? []
 
     if(ingredients.length > 0){
-      const oldIngredients = await knex("ingredients").where({plate_id: plate.id}).select("name").orderBy("name")
-
+      const oldIngredients = await knex("ingredients").where({plate_id: plate.id}).orderBy("name").then((data) => data.map((ingredients) => ingredients.name));
+      console.log(oldIngredients)
       const remove = oldIngredients.filter(
         (ingredient) => !ingredients.includes(ingredient)
       )
+      console.log(`Aqui ta o remove ${remove}`)
       
       await knex("ingredients").delete().where({plate_id: plate.id}).whereIn("name", remove)
       
-      const newIngredients = ingredients.filter((ingredient)=>{!oldIngredients.includes(ingredient)}).map((ingredient)=>({name: ingredient.trim(), plate_id: plate.id}))
-
+      const newIngredients = ingredients.filter((ingredient)=>!oldIngredients.includes(ingredient)).map((ingredient)=>({name: ingredient.trim(), plate_id: plate.id}))
+      console.log(`Aqui ta o New ${newIngredients}`)
       if(newIngredients.length !== 0){
         newIngredients.map(async (ingredient)=>{
           await knex("ingredients").insert(ingredient)
