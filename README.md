@@ -43,10 +43,9 @@ $ cd api-foodexplorer
 $ npm i
 
 # Este comando cria as tabelas no banco de dados
-# Como estamos usando Sqlite3 nesse projeto, ele ja vem com os dados ao clonar o repo
 $ npm run migrate
 
-# Este comando cria o usuario de Admin no banco se voce resolveu usar o npm migrate
+# Este comando cria o usuario de Admin no banco e o user padrao
 $ npm run seed
 
 # Admin login
